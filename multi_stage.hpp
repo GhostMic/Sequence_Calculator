@@ -1,33 +1,35 @@
-#ifndef MIC_SEQ_CAL_MULT_STAGE
-#define MIC_SEQ_CAL_MULT_STAGE
-
-#include "util.hpp"
+#ifndef MIC_MULTI_STAGE
+#define MIC_MULTI_STAGE
 
 class Multi_stage {
 public:
-    bool diff_arithmetic;
-    bool diff_geometric;
-    bool rate_arithmetic;
-    bool rate_geometric;
+    Multi_stage()
+    : diff_constant(false), diff_exponential(false), rate_constant(false),
+        rate_exponential(false), temp_diff() {}
 
-    vector<double> check_diff(const vector<double>&);
-    void check_rate(const vector<double>&);
+    bool is_multi_stage(const vector<double>&, const vector<double>&);
+    bool is_constant(const vector<double>&);
+    bool is_exponential(const vector<double>&);
 
-    void add_diff(vector<double>&, const int&);
-    void add_rate(vector<double>&);
+    void compile_diff(vector<double>&, const int&);
+    void compile_rate(vector<double>&, const int&);
 
-    bool is_multi_stage(const vector<double>& d, const vector<double>& r)
-    {
-        check_diff(d);
-        if(diff_arithmetic || diff_geometric){
-            return true;
-        }
-        check_rate(r);
-        if(rate_arithmetic || rate_geometric){
-            return true;
-        }
-        return false;
-    }
+    double arithmetic(vector<double>&, vector<double>&, const int&);
+    double geometric(vector<double>&, vector<double>&, const int&);
+    double sum(const vector<double>&, const int&);
+
+    bool get_diffconst() const;
+    bool get_diffexpo() const;
+    bool get_rateconst() const;
+    bool get_rateexpo() const;
+
+    void clear_temp();
+private:
+    bool diff_constant;
+    bool diff_exponential;
+    bool rate_constant;
+    bool rate_exponential;
+    vector<double> temp_diff;
 };
 
-#endif
+#endif // MIC_MULTI_STAGE

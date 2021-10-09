@@ -1,7 +1,5 @@
-#ifndef MIC_SEQ_CAL_GEO_SEQ
-#define MIC_SEQ_CAL_GEO_SEQ
-
-#include "util.hpp"
+#ifndef MIC_GEOMETRIC
+#define MIC_GEOMETRIC
 
 class Geometric {
 public:
@@ -14,20 +12,12 @@ public:
 
     double sum_of_geo(const vector<double>&, const int&, double&);
 
-    void clear_geo()
-    {
-        rate.clear();
-        //rate2.clear();
-    }
+    void clear_geo();
 
-    bool getBool()
-    {
-        return constant;
-    }
+    bool getBool();
 
 private:
     bool constant;
-    bool Multi_stage_type;
 };
 
-#endif
+#endif // MIC_GEOMETRIC

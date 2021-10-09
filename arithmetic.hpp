@@ -1,12 +1,9 @@
-#ifndef MIC_SEQ_CAL_ARITH_SEQ
-#define MIC_SEQ_CAL_ARITH_SEQ
-
-#include "util.hpp"
+#ifndef MIC_ARITH
+#define MIC_ARITH
 
 class Arithmetic {
 public:
     vector<double> diff;
-    //vector<double> diff2;
 
     double arithmetic(vector<double>&, const int&);
 
@@ -14,20 +11,12 @@ public:
 
     double sum_of_arith(const vector<double>&, const int&, const double&);
 
-    bool getBool()
-    {
-        return constant;
-    }
+    bool getBool();
 
-    void clear_arith()
-    {
-        diff.clear();
-        //diff2.clear();
-    }
+    void clear_arith();
 
 private:
     bool constant;
-    bool Multi_stage_type;
 };
 
-#endif
+#endif // MIC_ARITH
