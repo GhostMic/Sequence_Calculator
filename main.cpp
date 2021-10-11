@@ -1,6 +1,7 @@
 #include "header.hpp"
 #include "arithmetic.hpp"
 #include "geometric.hpp"
+#include "exponent.hpp"
 #include "multi_stage.hpp"
 #include "fibonacci.hpp"
 #include "utility.hpp"
@@ -9,6 +10,7 @@ class Type {
 public:
     bool is_arith;
     bool is_geo;
+    bool is_exponent;
     bool is_multi_stage;
     bool is_fibo;
 };
@@ -101,10 +103,11 @@ int main()
     Type type;
     Arithmetic arithmetic;
     Geometric geometric;
+    Exponent exponent;
     Multi_stage ms;
     Fibonacci fb;
 
-    vector<double> seq; // = {2,3,5,9,17,33};
+    vector<double> seq;
     double input;
     int n;
 
@@ -114,7 +117,8 @@ int main()
 
         type.is_arith = arithmetic.is_constant(seq);
         type.is_geo = geometric.is_exponential(seq);
-        if(!type.is_arith && !type.is_geo){
+        type.is_exponent = exponent.is_seq_exponent(seq);
+        if(!type.is_arith && !type.is_geo && !type.is_exponent){
             type.is_multi_stage = ms.is_multi_stage(arithmetic.diff, geometric.rate);
         }
         type.is_fibo = fb.is_fibonacci(seq);
@@ -131,12 +135,14 @@ int main()
             cout << "Sequence is arithmetic..." << endl;
         } else if(type.is_geo){
             cout << "Sequence is geometric..." << endl;
+        } else if(type.is_exponent){
+            cout << "Sequence is exponential..." << endl;
         } else if(type.is_multi_stage){
             cout << "Sequence is a two stage type..." << endl;
         } else if(type.is_fibo){
             cout << "Sequence is a fibonacci..." << endl;
         } else {
-            cerr << "There is no pattern..." << endl;
+            cerr << "Unknown pattern..." << endl;
             cout << "[Retry Input] \n\n";
             seq.clear();
             arithmetic.clear_arith();
@@ -155,6 +161,10 @@ int main()
         } else if(type.is_geo){
             nth_num = geometric.geometric(seq, n);
             sum = geometric.sum_of_geo(seq, n, nth_num);
+            print_seq(seq);
+        } else if(type.is_exponent){
+            nth_num = exponent.exponential(seq, n);
+            sum = exponent.expo_sum(seq, n);
             print_seq(seq);
         } else if(type.is_multi_stage){
             if(ms.get_diffconst() || ms.get_diffexpo()){
