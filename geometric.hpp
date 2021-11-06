@@ -1,5 +1,6 @@
 #ifndef MIC_GEOMETRIC
 #define MIC_GEOMETRIC
+#include "header.hpp"
 
 class Geometric {
 public:

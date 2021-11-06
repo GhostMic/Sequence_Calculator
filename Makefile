@@ -5,11 +5,11 @@ CXXFLAGS=-g -O3 -Wall -std=c++11
 
 all: main
 
-main: precompiledHeader main.cpp util.cpp multi_stage.cpp arithmetic.cpp geometric.cpp 
-	$(CXX) $(CXXFLAGS) main.cpp util.cpp multi_stage.cpp arithmetic.cpp geometric.cpp -o main
+main: precompiledHeader main.cpp multi_stage.cpp arithmetic.cpp geometric.cpp fibonacci.cpp
+	$(CXX) $(CXXFLAGS) main.cpp multi_stage.cpp arithmetic.cpp exponent.cpp geometric.cpp fibonacci.cpp -o main
 
-precompiledHeader: util.hpp multi_stage.hpp arithmetic.hpp geometric.hpp
-	$(CXX) $(CXXFLAGS) util.hpp multi_stage.hpp arithmetic.hpp geometric.hpp
+precompiledHeader: header.hpp utility.hpp multi_stage.hpp arithmetic.hpp geometric.hpp fibonacci.hpp
+	$(CXX) $(CXXFLAGS) header.hpp utility.hpp multi_stage.hpp arithmetic.hpp exponent.hpp geometric.hpp fibonacci.hpp
 
 clean:
 	rm -f *.gch *.exe

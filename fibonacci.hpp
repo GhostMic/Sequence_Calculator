@@ -1,5 +1,6 @@
 #ifndef FIBONACCI_HPP_INCLUDED
 #define FIBONACCI_HPP_INCLUDED
+#include "header.hpp"
 
 class Fibonacci {
 public:

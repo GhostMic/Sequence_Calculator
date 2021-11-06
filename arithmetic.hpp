@@ -1,5 +1,6 @@
 #ifndef MIC_ARITH
 #define MIC_ARITH
+#include "header.hpp"
 
 class Arithmetic {
 public:

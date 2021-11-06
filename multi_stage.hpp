@@ -1,5 +1,6 @@
 #ifndef MIC_MULTI_STAGE
 #define MIC_MULTI_STAGE
+#include "header.hpp"
 
 class Multi_stage {
 public:

@@ -1,8 +1,7 @@
 #include "header.hpp"
 #include "multi_stage.hpp"
 
-bool Multi_stage::is_multi_stage(const vector<double>& d, const vector<double>& r)
-{
+bool Multi_stage::is_multi_stage(const vector<double>& d, const vector<double>& r){
         diff_constant = is_constant(d);
         if(diff_constant){
             return true;
@@ -30,8 +29,7 @@ bool Multi_stage::is_multi_stage(const vector<double>& d, const vector<double>& 
         return false;
 }
 
-bool Multi_stage::is_constant(const vector<double>& d)
-{
+bool Multi_stage::is_constant(const vector<double>& d){
     for(int i = 1; i<d.size(); ++i){
         temp_diff.push_back(d[i]-d[i-1]);
     }
@@ -48,8 +46,7 @@ bool Multi_stage::is_constant(const vector<double>& d)
     return check;
 }
 
-bool Multi_stage::is_exponential(const vector<double>& d)
-{
+bool Multi_stage::is_exponential(const vector<double>& d){
     for(int i = 1; i<d.size(); ++i){
         temp_diff.push_back(d[i]/d[i-1]);
     }
@@ -66,8 +63,7 @@ bool Multi_stage::is_exponential(const vector<double>& d)
     return check;
 }
 
-void Multi_stage::compile_diff(vector<double>& diff, const int& n)
-{
+void Multi_stage::compile_diff(vector<double>& diff, const int& n){
     if(diff_constant && n > diff.size()){
         for(int i = diff.size()-1; i != n-2; ++i){
             diff.push_back(diff[i]+temp_diff[0]);
@@ -91,8 +87,7 @@ void Multi_stage::compile_diff(vector<double>& diff, const int& n)
     temp_diff.clear();
 }
 
-void Multi_stage::compile_rate(vector<double>& rate, const int& n)
-{
+void Multi_stage::compile_rate(vector<double>& rate, const int& n){
     if(rate_constant && n > rate.size()){
         for(int i = rate.size()-1; i != n-2; ++i){
             rate.push_back(rate[i]+temp_diff[0]);
@@ -116,8 +111,7 @@ void Multi_stage::compile_rate(vector<double>& rate, const int& n)
     temp_diff.clear();
 }
 
-double Multi_stage::arithmetic(vector<double>& seq, vector<double>& diff, const int& n)
-{
+double Multi_stage::arithmetic(vector<double>& seq, vector<double>& diff, const int& n){
     if(n > seq.size()){
         for(int i = seq.size()-1; i != n-1; ++i){
             seq.push_back(seq[i]+diff[i]);
@@ -127,8 +121,7 @@ double Multi_stage::arithmetic(vector<double>& seq, vector<double>& diff, const 
     return seq[n-1];
 }
 
-double Multi_stage::geometric(vector<double>& seq, vector<double>& rate, const int& n)
-{
+double Multi_stage::geometric(vector<double>& seq, vector<double>& rate, const int& n){
     if(n > seq.size()){
         for(int i = seq.size()-1; i != n-1; ++i){
             seq.push_back(seq[i]*rate[i]);
@@ -138,8 +131,7 @@ double Multi_stage::geometric(vector<double>& seq, vector<double>& rate, const i
     return seq[n-1];
 }
 
-double Multi_stage::sum(const vector<double>& seq, const int& n)
-{
+double Multi_stage::sum(const vector<double>& seq, const int& n){
     double sum;
     for(int i = 0; i < n; ++i){
         sum += seq[i];

@@ -1,5 +1,6 @@
 #ifndef MIC_EXPONENT
 #define MIC_EXPONENT
+#include "header.hpp"
 
 class Exponent {
 public:
